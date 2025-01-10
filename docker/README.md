@@ -10,9 +10,9 @@ nvcc -V
 You must change base image name and pytorch version compatible with your **CUDA version**. 
 
 ## Building the Docker Image
-Clone this repository and navigate into the current directory(nougat/docker). You can build the Docker image by running:
+Clone this repository and navigate into the current directory(nougat/docker). You can build the Docker image by running from top directory:
 ```sh
-docker build -t <image-name> .
+docker build -t <image-name> -f docker/Dockerfile .
 ```
 Replace <image-name> with a name of your choice. This will be used to refer to the image later.
 Please be patient as this operation can take a while. It needs to pull the CUDA-capable image from NVIDIA’s Docker repository and install several libraries.
