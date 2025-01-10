@@ -1,20 +1,16 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel
 # replace CUDA version to your CUDA version.
 # You can check your CUDA version with below.
 # nvcc -V
+# then check nvidia cuda container to find your version.
+# pip install pytorch fails, so will use pipx, but it still failed. So I use pytroch docker image.
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
+RUN pip install huggingface-hub fastapi uvicorn[standard] fsspec[http]==2024.9.0
 
-RUN apt-get update
-RUN apt-get install -y python3
-RUN apt-get -y install python3-pip git
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-# replace CUDA version to your CUDA version.
-
-RUN mkdir workspace
+RUN mkdir -p /workspace
 WORKDIR /workspace
-
-RUN pip3 install fastapi uvicorn[standard] fsspec[http]==2023.1.0
-RUN git clone https://github.com/facebookresearch/nougat.git
-WORKDIR /workspace/nougat
+COPY . /workspace
 
 RUN python3 setup.py install
 
