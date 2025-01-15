@@ -17,7 +17,7 @@ WORKDIR /workspace
 COPY . /workspace
 
 RUN uv init
-RUN uv add huggingface-hub==0.17.3 fastapi uvicorn[standard] fsspec[http]==2023.1.0 --no-cache-dir
+RUN uv add huggingface-hub==0.17.3 fastapi uvicorn[standard] fsspec[http]==2023.1.0 transformers albumentations==1.0.0 --no-cache-dir
 RUN uv add https://files.pythonhosted.org/packages/f7/29/13965af254e3373bceae8fb9a0e6ea0d0e571171b80d6646932131d6439b/setuptools-69.5.1-py3-none-any.whl
 
 RUN uv run python setup.py install
